@@ -1,0 +1,63 @@
+/* Basic reset for padding and margins */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: #2c3e50; /* Dark blue-gray background */
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ecf0f1; /* Light gray */
+    text-decoration: none;
+  }
+  
+  .nav-items {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-items li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+    transition: color 0.3s, background-color 0.3s;
+  }
+  
+  .nav-items li a:hover,
+  .nav-items li a.active {
+    color: #2c3e50; /* Dark color on hover or active */
+    background-color: #ecf0f1; /* Light background on hover or active */
+    border-radius: 5px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: 1px solid #bdc3c7; /* Light gray border */
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .search-bar input[type="text"]:focus {
+    border-color: #3498db; /* Blue on focus */
+  }
+  

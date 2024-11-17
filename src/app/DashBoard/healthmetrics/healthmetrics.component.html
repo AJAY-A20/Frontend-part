@@ -1,0 +1,77 @@
+<nav class="navbar">
+    <a class="navbar-brand" href="#">Wellness Hub</a>
+    <ul class="nav-items">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/healthmetrics" routerLinkActive="active">Health Metrics</a></li>
+      <li><a routerLink="/physical" routerLinkActive="active">Physical</a></li>
+      <li><a routerLink="/diet" routerLinkActive="active">Diet</a></li>
+      <li><a routerLink="/mental-health" routerLinkActive="active">Mental Health</a></li>
+      <li><a routerLink="/user-profile" routerLinkActive="active">User Profile</a></li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-container shadow-sm p-4 mb-5 rounded">
+                <h3 class="text-center mb-4">{{ isEditing ? 'Edit Health Metric Log' : 'Create Health Metric Log' }}</h3>
+                <form (ngSubmit)="onSubmit()" #healthMetricsForm="ngForm">
+                    <div class="form-group mb-3">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" [(ngModel)]="healthMetricsObj.username" name="username" required placeholder="Enter your name" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="metricId">Metric ID</label>
+                        <input type="number" class="form-control" [(ngModel)]="healthMetricsObj.metricId" name="metricId" required placeholder="Metric ID" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="value">Value</label>
+                        <input type="number" class="form-control" [(ngModel)]="healthMetricsObj.value" name="value" required placeholder="Value" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="dateRecorded">Date Recorded</label>
+                        <input type="date" class="form-control" [(ngModel)]="healthMetricsObj.dateRecorded" name="dateRecorded" required />
+                    </div>
+                    <button type="submit" class="btn profile-button w-100" [disabled]="isSubmitting">
+                        {{ isEditing ? 'Update Log' : 'Create Log' }}
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="table-container shadow-sm p-4 rounded">
+                <h3 class="text-center mb-4">Health Metric Logs</h3>
+                <div *ngIf="submittedLogs.length > 0">
+                    <table class="table table-hover table-striped">
+                        <thead class="table-header text-white">
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Username</th>
+                                <th>Metric ID</th>
+                                <th>Value</th>
+                                <th>Date Recorded</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let log of submittedLogs">
+                                <td>{{ log.logId }}</td>
+                                <td>{{ log.username }}</td>
+                                <td>{{ log.metricId }}</td>
+                                <td>{{ log.value }}</td>
+                                <td>{{ log.dateRecorded | date:'mediumDate' }}</td>
+                                <td>
+                                    <button (click)="editLog(log)" class="btn btn-warning btn-sm">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="submittedLogs.length === 0" class="text-center">
+                    <p class="text-muted">No logs available. Start by adding a new log.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

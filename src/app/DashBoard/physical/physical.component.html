@@ -1,0 +1,92 @@
+<nav class="navbar">
+  <a class="navbar-brand" href="#">Wellness Hub</a>
+  <ul class="nav-items">
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/healthmetrics" routerLinkActive="active">Health Metrics</a></li>
+    <li><a routerLink="/physical" routerLinkActive="active">Physical</a></li>
+    <li><a routerLink="/diet" routerLinkActive="active">Diet</a></li>
+    <li><a routerLink="/mental-health" routerLinkActive="active">Mental Health</a></li>
+    <li><a routerLink="/user-profile" routerLinkActive="active">User Profile</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
+
+<div class="container mt-5">
+  <!-- Row to align form and table side by side -->
+  <div class="row">
+    <!-- Form Section -->
+    <div class="col-md-5">
+      <div class="form-container shadow-sm p-4 mb-5 rounded">
+        <h3 class="text-center mb-4">{{ isEditing ? 'Edit Physical Activity Log' : 'Create Physical Activity Log' }}</h3>
+        <form (ngSubmit)="onSubmit()" #physicalActivityForm="ngForm">
+          <div class="form-group mb-3">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="physicalActivityObj.username" name="username" required placeholder="Enter your name" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="exerciseTypeId">Exercise Type ID</label>
+            <input type="number" class="form-control" [(ngModel)]="physicalActivityObj.exerciseTypeId" name="exerciseTypeId" required placeholder="Exercise Type ID" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="duration">Duration</label>
+            <input type="text" class="form-control" [(ngModel)]="physicalActivityObj.duration" name="duration" required placeholder="Duration (hh:mm:ss)" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="caloriesBurned">Calories Burned</label>
+            <input type="number" class="form-control" [(ngModel)]="physicalActivityObj.caloriesBurned" name="caloriesBurned" required placeholder="Calories Burned" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="exerciseDate">Exercise Date</label>
+            <input type="date" class="form-control" [(ngModel)]="physicalActivityObj.exerciseDate" name="exerciseDate" required placeholder="Exercise Date" />
+          </div>
+
+          <button type="submit" class="btn profile-button w-100" [disabled]="isSubmitting">
+            {{ isEditing ? 'Update Log' : 'Create Log' }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="col-md-7">
+      <div class="table-container shadow-sm p-4 rounded">
+        <h3 class="text-center mb-4">Physical Activity Logs</h3>
+        <div *ngIf="submittedLogs.length > 0">
+          <table class="table table-hover table-striped">
+            <thead class="table-header text-white">
+              <tr>
+                <th>Log ID</th>
+                <th>Username</th>
+                <th>Exercise Type ID</th>
+                <th>Duration</th>
+                <th>Calories Burned</th>
+                <th>Exercise Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of submittedLogs">
+                <td>{{ log.logId }}</td>
+                <td>{{ log.username }}</td>
+                <td>{{ log.exerciseTypeId }}</td>
+                <td>{{ log.duration }}</td>
+                <td>{{ log.caloriesBurned }}</td>
+                <td>{{ log.exerciseDate | date:'mediumDate' }}</td>
+                <td>
+                  <button (click)="editLog(log)" class="btn btn-warning btn-sm">Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="submittedLogs.length === 0" class="text-center">
+          <p class="text-muted">No logs available. Start by adding a new log.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

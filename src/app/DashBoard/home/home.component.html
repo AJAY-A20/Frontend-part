@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health & Wellness</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Custom Styles */
+    .navbar {
+      background-color: rgb(99, 39, 120); /* Lavender color */
+      border-bottom: 2px solid rgb(99, 39, 120); /* Deeper lavender for contrast */
+    }
+
+    .navbar a {
+      color: #d6d4d8; /* Indigo for links */
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      color: #dad9e0; /* Medium slate blue on hover */
+    }
+
+    .home-page {
+      background-image: url('assets/images/health-wellness-bg.jpg');
+      background-color: #ffffff; /* Lavender mist background */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      padding-top: 100px; /* Adjust for fixed navbar */
+      margin-bottom: 20px; /* Add gap between content and footer */
+    }
+
+    .home-page h1 { 
+      color: #020202; /* Indigo */
+      font-weight: bold;
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    .home-page p {
+      color: #3d3d3f; /* Slate blue */
+    }
+
+    .service-item {
+      background-color: rgba(255, 255, 255, 0.8); /* White with slight transparency */
+      color: #161516;
+      border: 2px solid #b19cd9; /* Lavender border */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-item:hover {
+      transform: translateY(-10px); /* Slight lift on hover */
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+    }
+
+    footer {
+      background-color: rgb(99, 39, 120); /* Violet background */
+      color: white;
+      padding: 20px 20px; /* Reduced padding for smaller footer */
+      text-align: center;
+    }
+
+    footer h3 {
+      margin-bottom: 10px; /* Reduced margin for smaller size */
+      font-size: 24px;
+    }
+
+    footer p {
+      font-size: 16px;
+    }
+
+    .btn-success {
+      background-color: rgb(99, 39, 120); /* Slate blue */
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: rgb(99, 39, 120); /* Medium purple */
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Wellness Hub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/healthmetrics" routerLinkActive="active">Health Metrics</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/physical" routerLinkActive="active">Physical</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/diet" routerLinkActive="active">Diet</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/mental-health" routerLinkActive="active">Mental Health</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/user-profile" routerLinkActive="active">User Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Page Section -->
+  <div class="home-page">
+    <div class="container text-center text-white">
+      <h1 class="display-4 mt-5">Welcome to Your Health & Wellness Journey</h1>
+      <p class="lead">Transform your life with our expert solutions in Physical Health, Diet, and Mental Wellness.</p>
+      
+      <!-- Service Section (3 Columns) -->
+      <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+          <div class="service-item p-4 rounded">
+            <h2>Physical Health</h2>
+            <p>Boost your fitness with personalized workouts, expert fitness tips, and comprehensive health tracking.</p>
+            <button class="btn btn-success btn-lg" [routerLink]="['/physical']">Explore</button>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="service-item p-4 rounded">
+            <h2>Diet & Nutrition</h2>
+            <p>Achieve your dietary goals with balanced meal plans, nutrition advice, and healthy recipes tailored for you.</p>
+            <button class="btn btn-success btn-lg" [routerLink]="['/diet']">Explore</button>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="service-item p-4 rounded">
+            <h2>Mental Wellness</h2>
+            <p>Take care of your mind with mindfulness techniques, stress management tips, and mental health support.</p>
+            <button class="btn btn-success btn-lg" [routerLink]="['/mental-health']">Explore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <h3>Start Your Wellness Journey Today</h3>
+    <p>Join us and take the first step towards a healthier and more balanced life. Your wellbeing matters.</p>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

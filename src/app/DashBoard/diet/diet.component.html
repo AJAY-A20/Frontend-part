@@ -1,0 +1,69 @@
+<nav class="navbar">
+    <a class="navbar-brand" href="#">Wellness Hub</a>
+    <ul class="nav-items">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/healthmetrics" routerLinkActive="active">Health Metrics</a></li>
+      <li><a routerLink="/physical" routerLinkActive="active">Physical</a></li>
+      <li><a routerLink="/diet" routerLinkActive="active">Diet</a></li>
+      <li><a routerLink="/mental-health" routerLinkActive="active">Mental Health</a></li>
+      <li><a routerLink="/user-profile" routerLinkActive="active">User Profile</a></li>
+    </ul>
+  </nav>
+  
+  <router-outlet></router-outlet>
+  
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-container shadow-sm p-4 mb-5 rounded">
+          <h3 class="text-center mb-4">{{ isSubmitting ? 'Submitting...' : 'Create Meal Record' }}</h3>
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <label for="mealType">Meal Type</label>
+              <select id="mealType" class="form-control" [(ngModel)]="meal.mealType" name="mealType" required>
+                <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+    
+            <div class="form-group mb-3">
+              <label for="userName">User Name</label>
+              <input id="userName" class="form-control" [(ngModel)]="meal.userName" name="userName" required placeholder="Enter user name" />
+            </div>
+    
+            <div class="form-group mb-3">
+              <label for="consumptionDate">Consumption Date</label>
+              <input type="date" id="consumptionDate" class="form-control" [(ngModel)]="meal.consumptionDate" name="consumptionDate" required />
+            </div>
+    
+            <div class="form-group mb-3">
+              <label for="numberOfFoods">No of Foods</label>
+              <input type="number" id="numberOfFoods" class="form-control" [(ngModel)]="numberOfFoods" (change)="onFoodCountChange()" name="numberOfFoods" required />
+            </div>
+    
+            <div *ngFor="let food of foods; let i = index">
+              <div class="form-group mb-3">
+                <label for="foodName{{i}}">Food Name</label>
+                <input type="text" class="form-control" [(ngModel)]="food.foodName" name="foodName{{i}}" required placeholder="Enter food name" />
+              </div>
+    
+              <div class="form-group mb-3">
+                <label for="quantity{{i}}">Quantity</label>
+                <input type="number" class="form-control" [(ngModel)]="food.quantity" name="quantity{{i}}" required placeholder="Enter quantity" />
+              </div>
+    
+              <div class="form-group mb-3">
+                <label for="unit{{i}}">Unit</label>
+                <input type="text" class="form-control" [(ngModel)]="food.unit" name="unit{{i}}" required placeholder="Enter unit" />
+              </div>
+            </div>
+    
+            <button type="submit" class="btn profile-button w-100" [disabled]="isSubmitting">Submit</button>
+          </form>
+          <div *ngIf="formSubmitted" class="alert alert-success mt-4">
+            <p><strong>Form submitted successfully!</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

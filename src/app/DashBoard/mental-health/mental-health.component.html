@@ -1,0 +1,86 @@
+<nav class="navbar">
+  <a class="navbar-brand" href="#">Wellness Hub</a>
+  <ul class="nav-items">
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/healthmetrics" routerLinkActive="active">Health Metrics</a></li>
+    <li><a routerLink="/physical" routerLinkActive="active">Physical</a></li>
+    <li><a routerLink="/diet" routerLinkActive="active">Diet</a></li>
+    <li><a routerLink="/mental-health" routerLinkActive="active">Mental Health</a></li>
+    <li><a routerLink="/user-profile" routerLinkActive="active">User Profile</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Form Section -->
+    <div class="col-md-5">
+      <div class="form-container shadow-sm p-4 mb-5 rounded">
+        <h3 class="text-center mb-4">{{ isEditing ? 'Edit Mental Health Log' : 'Create Mental Health Log' }}</h3>
+        <form (ngSubmit)="onSubmit()" #mentalHealthForm="ngForm">
+          <div class="form-group mb-3">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="mentalHealthObj.username" name="userName" required placeholder="Enter your name" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="moodId">Mood ID</label>
+            <input type="number" class="form-control" [(ngModel)]="mentalHealthObj.moodId" name="moodId" required placeholder="Mood ID" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="intensity">Intensity</label>
+            <input type="number" class="form-control" [(ngModel)]="mentalHealthObj.intensity" name="intensity" required placeholder="Intensity" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="notes">Notes</label>
+            <textarea class="form-control" [(ngModel)]="mentalHealthObj.notes" name="notes" placeholder="Enter your notes"></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <label for="logDate">Log Date</label>
+            <input type="date" class="form-control" [(ngModel)]="mentalHealthObj.logDate" name="logDate" required />
+          </div>
+          <button type="submit" class="btn profile-button w-100" [disabled]="isSubmitting">
+            {{ isEditing ? 'Update' : 'Submit' }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="col-md-7">
+      <div class="table-container shadow-sm p-4 rounded">
+        <h3 class="text-center mb-4">Submitted Logs</h3>
+        <div *ngIf="submittedLogs.length > 0">
+          <table class="table table-hover table-striped">
+            <thead class="table-header text-white">
+              <tr>
+                <th>Log ID</th>
+                <th>Username</th>
+                <th>Mood ID</th>
+                <th>Intensity</th>
+                <th>Notes</th>
+                <th>Log Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of submittedLogs">
+                <td>{{ log.logId }}</td>
+                <td>{{ log.username }}</td>
+                <td>{{ log.moodId }}</td>
+                <td>{{ log.intensity }}</td>
+                <td>{{ log.notes }}</td>
+                <td>{{ log.logDate | date:'mediumDate' }}</td>
+                <td>
+                  <button (click)="editLog(log)" class="btn btn-warning btn-sm">Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="submittedLogs.length === 0" class="text-center">
+          <p class="text-muted">No mental health logs available. Please submit a new log.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
